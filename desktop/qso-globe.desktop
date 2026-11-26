@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=QSO Globe
+GenericName=Amateur Radio Contact Visualizer
+Comment=Visualize amateur radio contacts on a real-time terrestrial globe
+Exec=qso-globe
+Icon=qso-globe
+Terminal=false
+Categories=Network;HamRadio;
+Keywords=Amateur Radio;QSO;Ham Radio;Globe;CQRLOG;Propagation;
+StartupNotify=false

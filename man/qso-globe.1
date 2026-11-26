@@ -1,0 +1,136 @@
+.TH QSO-GLOBE 1 "November 2026" "QSO Globe 1.0.0" "User Commands"
+.SH NAME
+qso-globe \- real-time amateur radio contact visualization
+.SH SYNOPSIS
+.B qso-globe
+.RI [ options ]
+.SH DESCRIPTION
+.B qso-globe
+is a hardware-accelerated terrestrial globe for visualizing
+amateur radio contacts.
+
+Incoming contact notifications initiate an animated great-circle
+visualization from the configured home station to the contacted
+station.
+
+The application supports solar illumination, twilight boundaries,
+gray-line highlighting, nighttime city lights, historical station
+markers, and adaptive destination magnification.
+
+Rendering is event-driven while the globe is stationary.
+.SH OPTIONS
+.TP
+.B --help
+Display command-line help.
+.TP
+.B --version
+Display the application version.
+.TP
+.B --show-config
+Display the effective configuration without opening a window,
+binding a network socket, or modifying saved preferences.
+.TP
+.B --test-expiry
+Use a 30-second marker retention period.
+Operator preferences are not saved in this mode.
+.SH KEYBOARD CONTROLS
+.TP
+.B D
+Toggle full daylight illumination.
+.TP
+.B N
+Toggle natural solar illumination.
+.TP
+.B G
+Toggle gray-line highlighting.
+.TP
+.B T
+Toggle the terminator contour.
+.TP
+.B Space
+Initiate the London demonstration.
+.TP
+.B Escape
+Exit the application.
+.SH CONFIGURATION
+The application uses an INI-style configuration file.
+
+Supported sections are station, window, animation,
+illumination, network, and textures.
+
+Missing configuration files use built-in defaults.
+Invalid configuration files prevent startup.
+
+Saved operator preferences override the configured window
+geometry and illumination preferences.
+.SH NETWORK PROTOCOL
+The application receives UDP datagrams on the IPv4 loopback
+interface.
+
+The default port is 45832.
+
+Each datagram contains four tab-separated fields:
+.PP
+.nf
+QSO1<TAB>ID<TAB>CALLSIGN<TAB>LOCATOR
+.fi
+.PP
+The identifier must be a nonzero unsigned 64-bit integer.
+
+Callsigns must contain between 3 and 20 permitted characters.
+
+Four-, six-, and eight-character Maidenhead locators
+are supported.
+
+Duplicate identifiers are suppressed using a bounded
+history of 1024 entries.
+The pending contact queue accommodates 128 events.
+.SH ENVIRONMENT
+.TP
+.B XDG_CONFIG_HOME
+Base directory for configuration and operator preferences.
+Defaults to $HOME/.config when unset or invalid.
+.TP
+.B QSO_DAY_TEXTURE
+Override the configured daytime JPEG texture.
+.TP
+.B QSO_NIGHT_TEXTURE
+Override the configured nighttime JPEG texture.
+.SH FILES
+.TP
+.I ~/.config/qso-globe/qso-globe.conf
+Permanent station configuration.
+.TP
+.I ~/.config/qso-globe/qso-globe.state
+Automatically maintained operator preferences.
+.TP
+.I ~/.local/share/qso-globe/textures/earth-8192.jpg
+Default high-resolution daytime texture.
+.TP
+.I ~/.local/share/qso-globe/textures/night-8192.jpg
+Default high-resolution nighttime texture.
+.TP
+.I /usr/share/xplanet/images/earth.jpg
+Fallback daytime texture.
+.TP
+.I /usr/share/xplanet/images/night.jpg
+Fallback nighttime texture.
+.SH REQUIREMENTS
+An X11 display, an OpenGL compatibility context,
+GLU, and libjpeg.
+
+Readable daytime and nighttime JPEG textures must be available.
+.SH LIMITATIONS
+Historical contacts are retained in memory only.
+
+Duplicate detection is bounded and does not persist across
+application restarts.
+
+The solar illumination model is geometric and is not
+an ionospheric propagation prediction.
+.SH SEE ALSO
+.BR X (7),
+.BR xplanet (1)
+.SH ACKNOWLEDGMENTS
+High-resolution terrestrial imagery is provided by
+NASA Blue Marble and NASA Black Marble datasets.

@@ -1,0 +1,35 @@
+# Compiled programs
+/qso-globe
+/tests/test-config
+/tests/test-state
+/tests/test-input
+/tests/test-solar
+
+# Compiler artifacts
+*.o
+*.a
+*.so
+*.core
+core
+
+# Generated imagery
+*.jpg
+*.jpeg
+
+# Temporary files
+*.new
+*.part
+*.tmp
+*~
+
+# Personal configuration and preferences
+/qso-globe.conf
+/qso-globe.state
+
+# Editor artifacts
+*.swp
+*.swo
+
+/tests/test-network
+
+/tests/test-filesystem

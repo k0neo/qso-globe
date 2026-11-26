@@ -1,0 +1,35 @@
+# QSO Globe 1.0.0
+#
+# Replace the callsign and geographic coordinates
+# with those of your amateur radio station.
+#
+# Latitude:  north positive, south negative.
+# Longitude: east positive, west negative.
+
+[station]
+callsign = NOCALL
+latitude = 0.0
+longitude = 0.0
+
+[window]
+width = 600
+height = 600
+x = 200
+y = 200
+
+[animation]
+home_range = 3.2
+transit_seconds = 4.0
+hold_seconds = 5.0
+marker_retention = 1800
+
+[illumination]
+mode = natural
+terminator = false
+
+[network]
+port = 45832
+
+[textures]
+day = earth-8192.jpg
+night = night-8192.jpg
